@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" fill="none">
+  <defs>
+    <!-- Background gradient: deep ocean → twilight -->
+    <linearGradient id="bg" x1="0" y1="0" x2="1024" y2="1024" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#020617"/>
+      <stop offset="0.45" stop-color="#0a1f3a"/>
+      <stop offset="1" stop-color="#1a0b40"/>
+    </linearGradient>
+
+    <!-- Subtle vignette -->
+    <radialGradient id="vignette" cx="0.5" cy="0.5" r="0.7">
+      <stop offset="0.55" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.45"/>
+    </radialGradient>
+
+    <!-- Main S gradient: cyan → azure → violet → magenta -->
+    <linearGradient id="sGrad" x1="180" y1="180" x2="860" y2="860" gradientUnits="userSpaceOnUse">
+      <stop offset="0"    stop-color="#a8e6ff"/>
+      <stop offset="0.18" stop-color="#5fc8ee"/>
+      <stop offset="0.38" stop-color="#3aa3e0"/>
+      <stop offset="0.58" stop-color="#5a72e8"/>
+      <stop offset="0.78" stop-color="#9b4fe0"/>
+      <stop offset="1"    stop-color="#e045b0"/>
+    </linearGradient>
+
+    <!-- Highlight gradient for glossy sheen -->
+    <linearGradient id="sheen" x1="200" y1="160" x2="600" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="0.6" stop-color="#ffffff" stop-opacity="0.05"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Inner wave-line gradient -->
+    <linearGradient id="waveLine" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.1"/>
+    </linearGradient>
+
+    <!-- Soft glow filter -->
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="14" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Strong outer glow for the S -->
+    <filter id="outerGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="22" result="blur"/>
+      <feColorMatrix in="blur" type="matrix"
+        values="0.3 0   0.6 0 0
+                0.2 0.4 0.9 0 0
+                0.8 0.2 1   0 0
+                0   0   0   0.85 0"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="220" fill="url(#bg)"/>
+  <rect width="1024" height="1024" rx="220" fill="url(#vignette)"/>
+
+  <!-- Outer glow halo (behind S) -->
+  <path d="
+    M 720 280
+    C 720 200, 580 160, 460 180
+    C 320 205, 240 290, 250 400
+    C 260 510, 380 545, 510 565
+    C 640 585, 770 615, 780 730
+    C 790 840, 700 880, 580 870
+    C 460 860, 320 810, 300 720"
+    stroke="url(#sGrad)" stroke-width="180" fill="none" stroke-linecap="round"
+    filter="url(#outerGlow)" opacity="0.55"/>
+
+  <!-- Main S body (thick gradient stroke) -->
+  <path d="
+    M 720 280
+    C 720 200, 580 160, 460 180
+    C 320 205, 240 290, 250 400
+    C 260 510, 380 545, 510 565
+    C 640 585, 770 615, 780 730
+    C 790 840, 700 880, 580 870
+    C 460 860, 320 810, 300 720"
+    stroke="url(#sGrad)" stroke-width="118" fill="none"
+    stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Glossy sheen on top half -->
+  <path d="
+    M 720 280
+    C 720 200, 580 160, 460 180
+    C 320 205, 240 290, 250 400"
+    stroke="url(#sheen)" stroke-width="80" fill="none" stroke-linecap="round" opacity="0.9"/>
+
+  <!-- Wave ripples inside the S (decorative) -->
+  <g opacity="0.55" filter="url(#glow)">
+    <path d="M 320 380 C 380 360, 440 400, 510 380"
+      stroke="url(#waveLine)" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <path d="M 480 690 C 540 670, 620 710, 700 690"
+      stroke="url(#waveLine)" stroke-width="6" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- Top accent dot -->
+  <circle cx="700" cy="270" r="14" fill="#ffffff" opacity="0.9"/>
+  <circle cx="700" cy="270" r="28" fill="#ffffff" opacity="0.25"/>
+
+  <!-- Bottom accent dot -->
+  <circle cx="320" cy="745" r="10" fill="#ffffff" opacity="0.7"/>
+</svg>

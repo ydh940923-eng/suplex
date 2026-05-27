@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="ja" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SUPLEX — プライバシー / Privacy Policy</title>
+<link rel="icon" type="image/svg+xml" href="./wave.svg" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: { colors: {
+    wave: { 50:'#e8f4fa',100:'#c5e4f4',200:'#8ccae8',300:'#4fafd9',400:'#1f95c5',500:'#0a7aaf',600:'#08628e',700:'#0a4f72',800:'#0c3f5c',900:'#0a2f47' },
+    base: '#070a0e', elev: '#0e141b', hover: '#162028', border: '#1f2b35',
+  }}}}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200;300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  body { font-family: 'Noto Sans JP', system-ui, sans-serif; font-weight: 300; -webkit-font-smoothing: antialiased; }
+  .wave-gradient { background: radial-gradient(circle at 70% 20%, #1a0b40 0%, #0a1f3a 50%, #020617 100%); }
+  .text-gradient { background: linear-gradient(135deg, #a8e6ff, #9b4fe0); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .lang-en { display: none; }
+  html[data-lang="en"] .lang-ja { display: none; }
+  html[data-lang="en"] .lang-en { display: block; }
+  html[data-lang="en"] span.lang-en { display: inline; }
+  article h2 { font-size: 1.25rem; font-weight: 500; color: #c5e4f4; margin: 2.5rem 0 1rem; }
+  article h3 { font-size: 1rem; font-weight: 500; color: #8ccae8; margin: 1.5rem 0 0.5rem; }
+  article p { color: #a1a5ab; margin: 0.75rem 0; line-height: 1.8; }
+  article ul { color: #a1a5ab; padding-left: 1.5rem; margin: 0.5rem 0; }
+  article li { line-height: 1.8; margin: 0.25rem 0; }
+  table { width: 100%; margin: 1rem 0; border-collapse: collapse; }
+  th, td { padding: 0.75rem; border-bottom: 1px solid #1f2b35; text-align: left; font-size: 0.875rem; color: #a1a5ab; }
+  th { color: #c5e4f4; font-weight: 500; }
+</style>
+</head>
+<body class="bg-base text-zinc-200 min-h-screen wave-gradient">
+
+<header class="max-w-4xl mx-auto px-6 py-5 flex items-center justify-between border-b border-border">
+  <a href="./" class="flex items-center gap-3">
+    <img src="./wave.svg" class="w-9 h-9 rounded-lg" alt="SUPLEX" />
+    <div>
+      <div class="font-semibold tracking-wide text-wave-100">SUPLEX</div>
+      <div class="text-[10px] text-zinc-500 uppercase tracking-widest">multichannel publisher</div>
+    </div>
+  </a>
+  <button onclick="toggleLang()" class="text-xs px-3 py-1 rounded border border-border hover:border-wave-500">
+    <span class="lang-ja">EN</span><span class="lang-en">JA</span>
+  </button>
+</header>
+
+<main class="max-w-3xl mx-auto px-6 py-16">
+  <p class="text-sm text-wave-300 uppercase tracking-widest mb-3">LEGAL</p>
+  <h1 class="text-4xl font-light mb-2">
+    <span class="lang-ja text-gradient">プライバシーポリシー</span>
+    <span class="lang-en text-gradient">Privacy Policy</span>
+  </h1>
+  <p class="text-sm text-zinc-500 mb-12">
+    <span class="lang-ja">最終更新: 2026年5月27日</span>
+    <span class="lang-en">Last updated: May 27, 2026</span>
+  </p>
+
+  <article class="lang-ja">
+    <h2>1. 基本方針</h2>
+    <p>SUPLEX は、ユーザーのプライバシーを最優先に設計されたローカルファースト型のデスクトップアプリケーションです。本アプリは原則として個人データをクラウドサーバーに送信せず、ユーザー自身のコンピューター上でのみ動作します。</p>
+
+    <h2>2. 収集する情報</h2>
+    <table>
+      <thead><tr><th>データ種別</th><th>保存場所</th><th>目的</th></tr></thead>
+      <tbody>
+        <tr><td>SNS アクセストークン</td><td>ユーザー PC (OS 暗号化)</td><td>各 SNS API への接続</td></tr>
+        <tr><td>アカウント識別子（ユーザー名等）</td><td>ユーザー PC (SQLite)</td><td>UI 表示</td></tr>
+        <tr><td>投稿コンテンツ（テキスト・画像・動画）</td><td>ユーザー PC</td><td>各 SNS への投稿</td></tr>
+        <tr><td>投稿履歴・結果</td><td>ユーザー PC</td><td>結果表示・再試行</td></tr>
+      </tbody>
+    </table>
+    <p>本サービスはユーザーの個人データを SUPLEX 運営側のサーバーに送信しません。投稿時に各 SNS の API へ直接通信します。</p>
+
+    <h2>3. 第三者への提供</h2>
+    <p>ユーザーが投稿する際、コンテンツは選択された SNS プラットフォーム（Instagram, TikTok 等）へ送信されます。これらは各プラットフォームのプライバシーポリシーに従って取り扱われます。</p>
+    <ul>
+      <li><a class="text-wave-300 hover:text-wave-200 underline" href="https://privacycenter.instagram.com/policy" target="_blank">Instagram プライバシーポリシー</a></li>
+      <li><a class="text-wave-300 hover:text-wave-200 underline" href="https://www.facebook.com/privacy/policy" target="_blank">Facebook プライバシーポリシー</a></li>
+      <li><a class="text-wave-300 hover:text-wave-200 underline" href="https://www.tiktok.com/legal/privacy-policy" target="_blank">TikTok プライバシーポリシー</a></li>
+      <li><a class="text-wave-300 hover:text-wave-200 underline" href="https://policies.google.com/privacy" target="_blank">Google (YouTube) プライバシーポリシー</a></li>
+      <li><a class="text-wave-300 hover:text-wave-200 underline" href="https://x.com/en/privacy" target="_blank">X プライバシーポリシー</a></li>
+      <li><a class="text-wave-300 hover:text-wave-200 underline" href="https://bsky.social/about/support/privacy-policy" target="_blank">Bluesky プライバシーポリシー</a></li>
+    </ul>
+
+    <h2>4. データ保管期間</h2>
+    <p>すべてのデータはユーザー PC 上に保存され、ユーザーがアンインストールするか手動で削除するまで保持されます。SUPLEX 運営側は保管期限を制御しません。</p>
+
+    <h2>5. ユーザーの権利</h2>
+    <p>ユーザーはいつでも以下を実行できます：</p>
+    <ul>
+      <li>各 SNS の認可を取り消す（アプリ内ボタン または 各プラットフォームの設定）</li>
+      <li>SUPLEX の全ローカルデータを削除する</li>
+      <li>本アプリをアンインストールする</li>
+    </ul>
+    <p>詳細手順は <a class="text-wave-300 hover:text-wave-200 underline" href="./data-deletion.html">データ削除ガイド</a> を参照。</p>
+
+    <h2>6. セキュリティ対策</h2>
+    <ul>
+      <li>アクセストークンは Windows DPAPI 等の OS 暗号化機能で保護されます</li>
+      <li>HTTPS 経由でのみ各 SNS API と通信します</li>
+      <li>OAuth コールバックはローカル（127.0.0.1）のみで受信します</li>
+    </ul>
+
+    <h2>7. 子どもの利用</h2>
+    <p>本サービスは 13 歳未満（日本以外では現地法で定める年齢未満）のユーザーを対象としていません。</p>
+
+    <h2>8. 国際的な利用</h2>
+    <p>本アプリは日本を拠点として運営されていますが、世界中からアクセス可能です。ローカルファースト設計のため、各国のデータ移転規制（GDPR、CCPA 等）に対しては SUPLEX 側で個人データを保持しない仕組みで対応しています。</p>
+
+    <h2>9. ポリシー変更</h2>
+    <p>本ポリシーは予告なく変更される場合があります。変更時は本ページに反映され、重要な変更はアプリ内通知も行います。</p>
+
+    <h2>10. お問い合わせ</h2>
+    <p>プライバシーに関するお問い合わせは <a class="text-wave-300 hover:text-wave-200 underline" href="mailto:ydh940923@gmail.com">ydh940923@gmail.com</a> までご連絡ください。</p>
+  </article>
+
+  <article class="lang-en hidden">
+    <h2>1. Core Principle</h2>
+    <p>SUPLEX is a local-first desktop application designed with user privacy as the top priority. By default, the app does not transmit personal data to cloud servers — it operates only on the user's own computer.</p>
+
+    <h2>2. Information We Collect</h2>
+    <table>
+      <thead><tr><th>Data type</th><th>Stored at</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>SNS access tokens</td><td>User's PC (OS-encrypted)</td><td>Connecting to each SNS API</td></tr>
+        <tr><td>Account identifiers (usernames, etc.)</td><td>User's PC (SQLite)</td><td>UI display</td></tr>
+        <tr><td>Content (text, images, videos)</td><td>User's PC</td><td>Publishing to selected SNS</td></tr>
+        <tr><td>Publishing history & results</td><td>User's PC</td><td>Display results, retries</td></tr>
+      </tbody>
+    </table>
+    <p>This Service does not send personal data to SUPLEX-operated servers. At publish time, content is sent directly to each SNS API.</p>
+
+    <h2>3. Third Parties</h2>
+    <p>When you publish, your content is sent to the selected SNS platform (Instagram, TikTok, etc.). These platforms handle your data per their own privacy policies.</p>
+
+    <h2>4. Data Retention</h2>
+    <p>All data is stored on your PC and retained until you uninstall the app or manually delete it. SUPLEX does not control retention periods.</p>
+
+    <h2>5. Your Rights</h2>
+    <ul>
+      <li>Revoke authorization on each SNS at any time (in-app button or platform settings)</li>
+      <li>Delete all SUPLEX local data</li>
+      <li>Uninstall the app</li>
+    </ul>
+    <p>See the <a class="text-wave-300 hover:text-wave-200 underline" href="./data-deletion.html">Data Deletion Guide</a> for details.</p>
+
+    <h2>6. Security</h2>
+    <ul>
+      <li>Access tokens are protected by OS-level encryption (Windows DPAPI, etc.)</li>
+      <li>Communication with SNS APIs is HTTPS-only</li>
+      <li>OAuth callbacks are received only on localhost (127.0.0.1)</li>
+    </ul>
+
+    <h2>7. Children's Use</h2>
+    <p>This Service is not intended for users under 13 (or the age specified by local law).</p>
+
+    <h2>8. International Use</h2>
+    <p>This app is operated from Japan but accessible worldwide. Due to the local-first design, we comply with international data transfer regulations (GDPR, CCPA, etc.) by simply not holding personal data on SUPLEX-side servers.</p>
+
+    <h2>9. Policy Changes</h2>
+    <p>This policy may be revised without prior notice. Updates are reflected on this page, and significant changes are also notified in-app.</p>
+
+    <h2>10. Contact</h2>
+    <p>For privacy inquiries, contact <a class="text-wave-300 hover:text-wave-200 underline" href="mailto:ydh940923@gmail.com">ydh940923@gmail.com</a>.</p>
+  </article>
+</main>
+
+<footer class="border-t border-border mt-20">
+  <div class="max-w-4xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-zinc-600">
+    <div>© 2026 SUPLEX</div>
+    <div class="flex gap-4">
+      <a href="./" class="hover:text-wave-300">Home</a>
+      <a href="./terms.html" class="hover:text-wave-300"><span class="lang-ja">利用規約</span><span class="lang-en">Terms</span></a>
+      <a href="./data-deletion.html" class="hover:text-wave-300"><span class="lang-ja">データ削除</span><span class="lang-en">Data Deletion</span></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleLang() {
+    const cur = document.documentElement.getAttribute('data-lang') ?? 'ja'
+    document.documentElement.setAttribute('data-lang', cur === 'ja' ? 'en' : 'ja')
+    localStorage.setItem('suplex-lang', document.documentElement.getAttribute('data-lang'))
+  }
+  const saved = localStorage.getItem('suplex-lang')
+  if (saved) document.documentElement.setAttribute('data-lang', saved)
+</script>
+</body>
+</html>
