@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<title>SUPLEX — Threads OAuth callback</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="/suplex/wave.svg" />
+<style>
+  body { font-family: 'Noto Sans JP', system-ui, sans-serif; font-weight: 300;
+         background: radial-gradient(circle at 70% 20%, #1a0b40 0%, #0a1f3a 50%, #020617 100%);
+         color: #e7e9eb; min-height: 100vh; display: flex; align-items: center;
+         justify-content: center; margin: 0; padding: 20px; -webkit-font-smoothing: antialiased; }
+  .box { background: #0e141b; border: 1px solid #1f2b35; padding: 40px 50px; border-radius: 12px;
+         text-align: center; max-width: 580px; box-shadow: 0 0 100px rgba(95,200,238,0.18); }
+  h1 { margin: 0 0 16px; font-size: 22px;
+       background: linear-gradient(135deg, #a8e6ff, #5fc8ee 30%, #9b4fe0 70%, #e045b0);
+       -webkit-background-clip: text; background-clip: text; color: transparent; }
+  p { margin: 12px 0; color: #a1a5ab; line-height: 1.7; font-size: 14px; }
+  .code-box { background: #060a0e; border: 1px solid #1f2b35; border-radius: 8px;
+              padding: 16px; margin: 16px 0; font-family: ui-monospace, monospace;
+              font-size: 12px; color: #5fc8ee; word-break: break-all; max-height: 200px;
+              overflow: auto; text-align: left; }
+  .note { font-size: 12px; color: #71757b; margin-top: 20px; }
+  .wave-logo { width: 56px; height: 56px; margin: 0 auto 20px; border-radius: 12px; }
+</style>
+</head>
+<body>
+<div class="box">
+  <img src="/suplex/wave.svg" class="wave-logo" alt="SUPLEX" />
+  <h1>Threads OAuth コールバック</h1>
+  <p>SUPLEX が認証応答を処理しています。アプリは自動的にこのページの URL を読み取ります。</p>
+  <p>このウィンドウは自動で閉じます。閉じない場合は手動で閉じてください。</p>
+  <div id="codeView" class="code-box" style="display:none"></div>
+  <p class="note">本ページはコンテンツを表示しません。実際のトークン処理は SUPLEX デスクトップアプリ内で行われます。</p>
+</div>
+<script>
+  // Display received params so SUPLEX BrowserWindow can scrape them if its
+  // will-redirect interceptor misses, and for manual debug.
+  const url = new URL(window.location.href)
+  const params = {}
+  url.searchParams.forEach((v, k) => params[k] = v)
+  if (Object.keys(params).length > 0) {
+    const view = document.getElementById('codeView')
+    view.style.display = 'block'
+    view.textContent = JSON.stringify(params, null, 2)
+  }
+  // Try to auto-close after short delay (SUPLEX will close it via webContents.close())
+  setTimeout(() => { try { window.close() } catch {} }, 5000)
+</script>
+</body>
+</html>
