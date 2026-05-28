@@ -11,41 +11,137 @@
          color: #e7e9eb; min-height: 100vh; display: flex; align-items: center;
          justify-content: center; margin: 0; padding: 20px; -webkit-font-smoothing: antialiased; }
   .box { background: #0e141b; border: 1px solid #1f2b35; padding: 40px 50px; border-radius: 12px;
-         text-align: center; max-width: 580px; box-shadow: 0 0 100px rgba(95,200,238,0.18); }
+         text-align: center; max-width: 720px; width: 100%; box-shadow: 0 0 100px rgba(95,200,238,0.18); }
   h1 { margin: 0 0 16px; font-size: 22px;
        background: linear-gradient(135deg, #a8e6ff, #5fc8ee 30%, #9b4fe0 70%, #e045b0);
        -webkit-background-clip: text; background-clip: text; color: transparent; }
   p { margin: 12px 0; color: #a1a5ab; line-height: 1.7; font-size: 14px; }
-  .code-box { background: #060a0e; border: 1px solid #1f2b35; border-radius: 8px;
-              padding: 16px; margin: 16px 0; font-family: ui-monospace, monospace;
-              font-size: 12px; color: #5fc8ee; word-break: break-all; max-height: 200px;
-              overflow: auto; text-align: left; }
-  .note { font-size: 12px; color: #71757b; margin-top: 20px; }
+  .code-label { font-size: 11px; color: #71757b; letter-spacing: 1px; margin-top: 24px; margin-bottom: 8px; text-transform: uppercase; }
+  .code-display { background: #060a0e; border: 1px solid #5fc8ee; border-radius: 8px;
+                  padding: 18px; font-family: ui-monospace, monospace;
+                  font-size: 13px; color: #a8e6ff; word-break: break-all;
+                  text-align: left; user-select: all; cursor: text;
+                  box-shadow: 0 0 24px rgba(95,200,238,0.12); }
+  .copy-btn { margin-top: 12px; padding: 12px 28px; background: linear-gradient(135deg, #5fc8ee, #9b4fe0);
+              color: white; border: 0; border-radius: 8px; font-size: 14px; font-weight: 400; cursor: pointer;
+              transition: opacity 0.2s; }
+  .copy-btn:hover { opacity: 0.85; }
+  .copy-btn.copied { background: #10b981; }
+  .steps { background: #0a1018; border: 1px solid #1f2b35; border-radius: 8px; padding: 16px;
+           margin: 20px 0; text-align: left; font-size: 12px; color: #c8cdd2; line-height: 1.8; }
+  .steps strong { color: #a8e6ff; }
+  .error-box { background: #2a0a0e; border: 1px solid #ef4444; border-radius: 8px; padding: 16px;
+               margin: 20px 0; text-align: left; font-size: 12px; color: #fca5a5; line-height: 1.6; }
+  .note { font-size: 11px; color: #71757b; margin-top: 24px; }
   .wave-logo { width: 56px; height: 56px; margin: 0 auto 20px; border-radius: 12px; }
+  .raw-params { background: #060a0e; border: 1px solid #1f2b35; border-radius: 8px; padding: 12px;
+                margin-top: 16px; font-family: ui-monospace, monospace; font-size: 10px; color: #5fc8ee;
+                word-break: break-all; max-height: 140px; overflow: auto; text-align: left; }
+  details { margin-top: 16px; text-align: left; }
+  summary { cursor: pointer; color: #71757b; font-size: 12px; }
 </style>
 </head>
 <body>
 <div class="box">
   <img src="/suplex/wave.svg" class="wave-logo" alt="SUPLEX" />
-  <h1>Instagram OAuth コールバック</h1>
-  <p>SUPLEX が認証応答を処理しています。アプリは自動的にこのページの URL を読み取ります。</p>
-  <p>このウィンドウは自動で閉じます。閉じない場合は手動で閉じてください。</p>
-  <div id="codeView" class="code-box" style="display:none"></div>
-  <p class="note">本ページはコンテンツを表示しません。実際のトークン処理は SUPLEX デスクトップアプリ内で行われます。</p>
+  <h1 id="title">Instagram 認証完了</h1>
+  <div id="content"></div>
+  <p class="note">この画面を閉じないでください。SUPLEX に認証コードをペーストするまで表示されます。</p>
 </div>
 <script>
-  // Display received params so SUPLEX BrowserWindow can scrape them if its
-  // will-redirect interceptor misses, and for manual debug.
   const url = new URL(window.location.href)
   const params = {}
   url.searchParams.forEach((v, k) => params[k] = v)
-  if (Object.keys(params).length > 0) {
-    const view = document.getElementById('codeView')
-    view.style.display = 'block'
-    view.textContent = JSON.stringify(params, null, 2)
+  const content = document.getElementById('content')
+  const title = document.getElementById('title')
+
+  if (params.error || params.error_message) {
+    title.textContent = '認証エラー'
+    title.style.background = 'linear-gradient(135deg, #fca5a5, #ef4444)'
+    title.style.webkitBackgroundClip = 'text'
+    title.style.backgroundClip = 'text'
+    title.style.color = 'transparent'
+    const errBox = document.createElement('div')
+    errBox.className = 'error-box'
+    errBox.innerHTML = '<strong>Instagram からエラーが返されました：</strong><br><br>' +
+      'error: ' + (params.error || '(none)') + '<br>' +
+      'error_message: ' + (params.error_message || '(none)') + '<br>' +
+      'error_reason: ' + (params.error_reason || '(none)')
+    content.appendChild(errBox)
+  } else if (params.code) {
+    const steps = document.createElement('div')
+    steps.className = 'steps'
+    steps.innerHTML =
+      '<strong>次のステップ:</strong><br>' +
+      '1. 下のコードを <strong>コピー</strong><br>' +
+      '2. SUPLEX アプリの 認証コードペースト欄 に貼り付け<br>' +
+      '3. 「処理」ボタンをクリック → チャンネル登録完了'
+    content.appendChild(steps)
+
+    const label = document.createElement('div')
+    label.className = 'code-label'
+    label.textContent = '認証コード (CODE)'
+    content.appendChild(label)
+
+    const codeBox = document.createElement('div')
+    codeBox.className = 'code-display'
+    codeBox.id = 'codeBox'
+    codeBox.textContent = params.code
+    content.appendChild(codeBox)
+
+    const btn = document.createElement('button')
+    btn.className = 'copy-btn'
+    btn.textContent = '📋 コピー'
+    btn.onclick = async () => {
+      try {
+        await navigator.clipboard.writeText(params.code)
+        btn.textContent = '✓ コピーしました'
+        btn.classList.add('copied')
+        setTimeout(() => {
+          btn.textContent = '📋 コピー'
+          btn.classList.remove('copied')
+        }, 2500)
+      } catch (e) {
+        const sel = window.getSelection()
+        const range = document.createRange()
+        range.selectNodeContents(codeBox)
+        sel.removeAllRanges()
+        sel.addRange(range)
+        try { document.execCommand('copy'); btn.textContent = '✓ コピーしました'; btn.classList.add('copied') } catch {}
+      }
+    }
+    content.appendChild(btn)
+
+    if (params.state) {
+      const stateNote = document.createElement('p')
+      stateNote.style.fontSize = '10px'
+      stateNote.style.color = '#71757b'
+      stateNote.style.marginTop = '20px'
+      stateNote.textContent = 'state: ' + params.state
+      content.appendChild(stateNote)
+    }
+
+    setTimeout(() => {
+      try { navigator.clipboard.writeText(params.code) } catch {}
+    }, 300)
+  } else {
+    title.textContent = 'リダイレクト処理中...'
+    const p = document.createElement('p')
+    p.textContent = 'Instagram から認証情報が返されませんでした。SUPLEX で再度お試しください。'
+    content.appendChild(p)
   }
-  // Try to auto-close after short delay (SUPLEX will close it via webContents.close())
-  setTimeout(() => { try { window.close() } catch {} }, 5000)
+
+  if (Object.keys(params).length > 0) {
+    const det = document.createElement('details')
+    const sum = document.createElement('summary')
+    sum.textContent = 'デバッグ情報 (生の URL パラメータ)'
+    det.appendChild(sum)
+    const raw = document.createElement('div')
+    raw.className = 'raw-params'
+    raw.textContent = JSON.stringify(params, null, 2)
+    det.appendChild(raw)
+    content.appendChild(det)
+  }
 </script>
 </body>
 </html>
